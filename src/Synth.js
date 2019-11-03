@@ -4,6 +4,7 @@ const Speaker = require('speaker');
 module.exports = class Synth {
 	constructor() {
 		this.active = false;
+		this.on = false;
 
 		this.context = new AudioContext();
 		this.context.pipe(new Speaker());
@@ -25,6 +26,12 @@ module.exports = class Synth {
 		this.updateNote = this.updateNote.bind(this);
 	}
 
+	toggle() {
+		this.on = !this.on;
+		this.active = false;
+		this.gain.gain.value = 0;
+	}
+
 	_setFreqVol(freq, vol) {
 		if (freq) {
 			this.osc.frequency.value = freq;
@@ -36,12 +43,18 @@ module.exports = class Synth {
 	}
 
 	startNote(freq, vol) {
+		if (!this.on) {
+			return;
+		}
 		this.active = true;
 
 		this._setFreqVol(freq, vol);
 	}
 
 	updateNote(freq, vol) {
+		if (!this.on) {
+			return;
+		}
 		this._setFreqVol(freq, vol);
 	}
 

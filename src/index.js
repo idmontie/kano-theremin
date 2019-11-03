@@ -47,14 +47,6 @@ DeviceManager.listConnectedDevices()
 				}
 			}
 		});
-        
-		msk.on('gesture', (g) => {
-			debug('Gesture:', g);
-
-			if (g === 'left') {
-				synth.toggle();
-			}
-		});
 	}).catch((e) => {
 		console.error(e);
 		process.exit();

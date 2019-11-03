@@ -4,7 +4,7 @@ const Speaker = require('speaker');
 module.exports = class Synth {
 	constructor() {
 		this.active = false;
-		this.on = false;
+		this.on = true;
 
 		this.context = new AudioContext();
 		this.context.pipe(new Speaker());
